@@ -6,7 +6,7 @@
 #include <RoomWeather.h>
 
 // Fields to fill:
-// SENSOR_NAME, WIFI_SSID/WIFI_PASSWORD, INFLUXDB_TOKEN, INFLUXDB_ORG
+// SENSOR_NAME, WIFI_SSID/WIFI_PASSWORD, INFLUXDB_ORG, INFLUXDB_TOKEN
 
 // Name the sensor
 #define SENSOR_NAME ""    // e.g. PM_Node_1
@@ -15,8 +15,8 @@
 #define WIFI_SSID ""      // Network Name 
 #define WIFI_PASSWORD ""  // Network Password (if needed)
 #define INFLUXDB_URL "https://us-east-1-1.aws.cloud2.influxdata.com" // InfluxDB v2 server url, e.g. https://eu-central-1-1.aws.cloud2.influxdata.com (Use: InfluxDB UI -> Load Data -> Client Libraries)
-#define INFLUXDB_TOKEN ""   // InfluxDB v2 server or cloud API token (Use: InfluxDB UI -> Data -> API Tokens -> <select token>)
 #define INFLUXDB_ORG ""     // InfluxDB v2 organization id, e.g. qatomarray1 (Use: InfluxDB UI -> User -> About -> Common Ids )
+#define INFLUXDB_TOKEN ""   // InfluxDB v2 server or cloud API token (Use: InfluxDB UI -> Data -> API Tokens -> <select token>)
 #define INFLUXDB_BUCKET "Temperature_Humidity" // InfluxDB v2 bucket name (Use: InfluxDB UI ->  Data -> Buckets)
 #define TZ_INFO "EST-5"     // Time zone          
 
@@ -44,7 +44,7 @@ void setup() {
   Serial.begin(115200);
 
   WiFi.mode(WIFI_STA);                                // Set WiFi to station mode and disconnect from an AP if it was previously connected
-  wifiMulti.addAP(WIFI_SSID);                         // If a password is needed: wifiMulti.addAP(WIFI_SSID, WIFI_PASSWORD);
+  wifiMulti.addAP(WIFI_SSID, WIFI_PASSWORD);          // Set the WiFi
 
   Serial.print("Connecting to wifi");                 // Connect to WiFi
   while (wifiMulti.run() != WL_CONNECTED) 
