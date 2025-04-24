@@ -6,18 +6,17 @@
 #include "Adafruit_HTU31D.h"
 
 // Fields to fill:
-// SENSOR_NAME, WIFI_SSID/WIFI_PASSWORD, INFLUXDB_TOKEN, INFLUXDB_ORG
+// SENSOR_NAME, WIFI_SSID/WIFI_PASSWORD, INFLUXDB_ORG, INFLUXDB_TOKEN
 
 // Name the sensor
 #define SENSOR_NAME ""    // e.g. TH_Node_1
 
 // Define InfluxDB credentials and data location
-#define WIFI_SSID ""      // Network Name
-#define WIFI_PASSWORD ""  // Network Password (if needed)
-
+#define WIFI_SSID ""      // Wifi Name 
+#define WIFI_PASSWORD ""  // Wifi Password (if needed)
 #define INFLUXDB_URL "https://us-east-1-1.aws.cloud2.influxdata.com" // InfluxDB v2 server url, e.g. https://eu-central-1-1.aws.cloud2.influxdata.com (Use: InfluxDB UI -> Load Data -> Client Libraries)
-#define INFLUXDB_TOKEN ""   // InfluxDB v2 server or cloud API token (Use: InfluxDB UI -> Data -> API Tokens -> <select token>)
 #define INFLUXDB_ORG ""     // InfluxDB v2 organization id, e.g. qatomarray1 (Use: InfluxDB UI -> User -> About -> Common Ids )
+#define INFLUXDB_TOKEN ""   // InfluxDB v2 server or cloud API token (Use: InfluxDB UI -> Data -> API Tokens -> <select token>)
 #define INFLUXDB_BUCKET "Temperature_Humidity" // InfluxDB v2 bucket name (Use: InfluxDB UI ->  Data -> Buckets)
 #define TZ_INFO "EST-5"     // Time zone
 
@@ -32,12 +31,11 @@ InfluxDBClient client(INFLUXDB_URL, INFLUXDB_ORG, INFLUXDB_BUCKET, INFLUXDB_TOKE
 
 void setup() {
   Serial.begin(115200);
+  
+  WiFi.mode(WIFI_STA);                                        // Set WiFi to station mode and disconnect from an AP if it was previously connected
+  wifiMulti.addAP(WIFI_SSID, WIFI_PASSWORD);                  // Set the WiFI
 
-  // Set WiFi to station mode and disconnect from an AP if it was previously connected
-  WiFi.mode(WIFI_STA);
-  wifiMulti.addAP(WIFI_SSID); // If a password is needed: wifiMulti.addAP(WIFI_SSID, WIFI_PASSWORD);
-
-  Serial.print("Connecting to wifi");                               // Connect to WiFi
+  Serial.print("Connecting to wifi");                         // Connect to WiFi
   while (wifiMulti.run() != WL_CONNECTED) 
   {
     Serial.print("*");
@@ -48,9 +46,9 @@ void setup() {
   Serial.println("Connected to wifi!");
   delay(2000);
 
-  timeSync("EST-5", "pool.ntp.org", "time.nis.gov");                 // Accurate time is necessary for certificate validation and writing in batches
+  timeSync("EST-5", "pool.ntp.org", "time.nis.gov");          // Accurate time is necessary for certificate validation and writing in batches
   
-  if (client.validateConnection())                                   // Check server connection
+  if (client.validateConnection())                            // Check server connection
   {
     Serial.print("Connected to InfluxDB: ");
     Serial.println(client.getServerUrl());
