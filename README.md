@@ -9,9 +9,8 @@ We use the [HTU31](https://www.adafruit.com/product/4832) temperature and humidi
 	2. Install "Adafruit HTU31D Library"
 #### Live monitoring:
 
-1. Clone this repo: [https://github.com/QPG-MIT/qpatomarray1/](https://github.com/QPG-MIT/qpatomarray1/)
-2. Go to facilities/Temp_Humidity_Monitoring
-3. Open Temp_Humidity_Monitoring.ino
+1. Clone this repo: [https://github.com/vetrisvel/Lab-Monitoring-QP-Atom-Array-1](https://github.com/vetrisvel/Lab-Monitoring-QP-Atom-Array-1)
+2. Go to Temp_Humidity_Monitoring and open Temp_Humidity_Monitoring.ino
 4. Change the name of the sensor to “TH_Node_X” where X is the number you want  (in line 19)
 5. Select the SparkFun ESP32 Thing Plus board
 6. Upload    
@@ -25,9 +24,8 @@ We use the [HTU31](https://www.adafruit.com/product/4832) temperature and humidi
 	2. Install  "RoomWeather" by Gobbo Lab
 #### Live monitoring:
 
-1. Clone this repo: [https://github.com/QPG-MIT/qpatomarray1/](https://github.com/QPG-MIT/qpatomarray1/)
-2. Go to facilities/PM_Monitoring
-3. Open PM_Monitoring.ino
+1. Clone this repo: [https://github.com/vetrisvel/Lab-Monitoring-QP-Atom-Array-1](https://github.com/vetrisvel/Lab-Monitoring-QP-Atom-Array-1)
+2. Go to PM_Monitoring and open PM_Monitoring.ino
 4. Change the name of the sensor to “PM_Node_X” where X is the number you want  (in line 19)
 5. Select the SparkFun ESP32 Thing Plus board
 6. Upload
